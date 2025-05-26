@@ -43,6 +43,6 @@ export default defineConfig({
       // });
       return config;
     },
-   // baseUrl: "https://reactdev.getinsights.org/", // Change as needed
+    baseUrl: "https://dev.mpartial.io/", // Change as needed
   },
 });

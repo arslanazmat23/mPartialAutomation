@@ -1,4 +1,7 @@
 /// <reference types="cypress" />
+/// <reference types="cypress-xpath" />
+/// <reference types="cypress-cucumber-preprocessor/steps" />
+
 // ***********************************************
 // This example commands.ts shows you how to
 // create various custom commands and overwrite
