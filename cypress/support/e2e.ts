@@ -17,4 +17,8 @@
 import './commands'
 
 import 'cypress-xpath';
+import "cypress-mailosaur";
+import '@badeball/cypress-cucumber-preprocessor/steps' // If you have common steps
+import 'cypress-mailosaur/commands'; // <--- ADD THIS LINE!
+
   

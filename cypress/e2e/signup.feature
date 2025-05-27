@@ -32,7 +32,16 @@ Feature: Impartial Signup Flow
     When the user clicks "CONTINUE"
     Then the login page is displayed
 
+    # pass the actual email into the verification step
+    When the user retrieves and visits their verification link for "<email>"
+    Then the email verification page is displayed
+   # When the user verifies their email via Mailosaur "<email>"
+   # And the user clicks "CONTINUE"
+    Then the login page is displayed
+    When the user logs in with "<email>" and "<password>"
+    Then the profile is displayed
+
 
   Examples:
     | email                       | firstName     | lastName | cellNumber   | role           | password         |
-    | tikin97155@betzenn.com      | Hafiz         | Arslan   | 0123456789   | Contractor     | Your@Password123  |
+    | health-explanation@wrijtpjg.mailosaur.net    | Hafiz         | Arslan   | 0123456789   | Contractor     | Your@Password123  |

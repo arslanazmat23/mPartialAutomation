@@ -1,5 +1,7 @@
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
+import { SignupPage } from "../../support/PageObjectModel/signup";
 
+const signup = new SignupPage();
 declare global {
   interface Window {
     grecaptcha?: {
@@ -130,8 +132,8 @@ When(
   (password: string) => {
     cy.xpath("(//input[@type='password'])[1]").clear().type(password);
     cy.xpath("(//input[@type='password'])[2]")
-      .clear()
-      .type(password);
+      .clear({ force: true })
+  .type(password, { force: true });
   }
 );
 
@@ -152,23 +154,77 @@ When('the user clicks "CREATE"', () => {
   cy.get('#formButton').click();
 });
 
+// 7) Confirmation message
 Then("the confirmation message is displayed", () => {
   cy.contains("check your inbox and verify your email").should("be.visible");
 });
 
-When('the user clicks "CONTINUE"', () => {
-  // click the Continue button on the confirmation screen
-  cy.xpath("//button[normalize-space()='Continue']").click();
+// When('the user clicks "CONTINUE"', () => {
+//   // click the Continue button on the confirmation screen
+//   cy.xpath("//button[normalize-space()='Continue']").click();
+// });
+
+// Then('the login page is displayed', () => {
+//   // URL should include /login
+//   cy.url().should('include', '/login');
+
+//   // both fields should now be visible
+//   cy.xpath("//input[@type='email']").should('be.visible');
+//   cy.xpath("//input[@type='password']").should('be.visible');
+
+//   // and the Sign In button
+//   cy.get('#formButton').should('be.visible');
+// });
+
+// 8) Email verification via Mailosaur
+When(
+  'the user retrieves and visits their verification link for {string}',
+  (emailAddress: string) => {
+    signup.retrieveEmailVerificationLink(emailAddress);
+  }
+);
+
+
+Then("the email verification page is displayed", () => {
+  // 1) URL should include the confirm‐email route
+  cy.url().should("include", "/Client/ConfirmEmail");
+
+  // 2) The big success message must be visible
+  cy.contains("Your email address is verified.").should("be.visible");
+
+  // 3) “Proceed” button shows up
+  cy.get(':nth-child(3) > .btn').click({force: true });
 });
 
-Then('the login page is displayed', () => {
-  // URL should include /login
-  cy.url().should('include', '/login');
+// 9) CONTINUE to login
+When('the user clicks "CONTINUE"', () => {
+  cy.xpath("//button[normalize-space()='Continue']").click(); // this is the CONTINUE button
+});
 
-  // both fields should now be visible
-  cy.xpath("//input[@type='email']").should('be.visible');
-  cy.xpath("//input[@type='password']").should('be.visible');
+Then("the login page is displayed", () => {
+  cy.url().should("include", "/login");
+  cy.xpath("//input[@type='email']").should("be.visible");
+  cy.xpath("//input[@type='password']").should("be.visible");
+  cy.get('#formButton').should("be.visible");
+});
 
-  // and the Sign In button
-  cy.get('#formButton').should('be.visible');
+// 10) Finally, log in with the same creds
+When('the user logs in with {string} and {string}', (email, password) => {
+  // cast to string so .type() is happy
+  cy.xpath("//input[@type='email']")
+    .clear()
+    .type(email as string);
+
+  cy.xpath("//input[@type='password']")
+    .clear()
+    .type(password as string);
+
+  cy.get('#formButton').click();
+});
+
+
+Then("the profile is displayed", () => {
+  cy.url().should("include", "/profile");
+  // adjust this selector to something unique on your dashboard
+  cy.contains("h1", "My Account").should("be.visible");
 });
