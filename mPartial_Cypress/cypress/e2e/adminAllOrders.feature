@@ -1,10 +1,8 @@
 Feature: All Orders Tabs
 
   Background: the admin user is logged in
-    Given the admin user is logged in
-
-  Background: the admin is on the All Orders page
-    Given the admin navigates to the All Orders page
+    Given the admin user is logged in 
+    And the admin navigates to the All Orders page
 
   @orders-tabs
   Scenario: Default tab is mpartialScope - Xactimate
