@@ -28,5 +28,9 @@ export default defineConfig({
   },
   env: {
       MAILOSAUR_API_KEY: "OHVTWfEwbw8Bg1exCLyUdqL8jOQOil4M",
-      MAILOSAUR_SERVER_ID: "wrijtpjg",} 
+      MAILOSAUR_SERVER_ID: "wrijtpjg",
+
+      ADMIN_USERNAME: "arslan",
+      ADMIN_PASSWORD: "harslan12345",
+    } 
 });
