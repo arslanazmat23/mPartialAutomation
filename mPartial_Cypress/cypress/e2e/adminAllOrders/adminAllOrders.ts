@@ -1,101 +1,93 @@
-// cypress/e2e/adminAllOrdersTabs.ts
+// cypress/e2e/adminAllOrders.ts
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
-let firstRowTextXactimate: string;
+let firstRowXactimate: string;
 
 //
-// Background #1: the admin user is logged in
+// Background #1: real UI login (lands on 2FA screen)
 //
 Given("the admin user is logged in", () => {
-  // purely UI-based login
+  cy.viewport(1280, 800);
   cy.visit("/mpartialadmin");
   cy.get('input[placeholder="Username"]').type("arslan");
   cy.get('input[type="password"]').type("harslan12345");
-  cy.contains("SIGN IN").click();
-
-  // after login we land on the 2FA screen
+  cy.get('.btn').click();
   cy.url().should("include", "/enable2FA/arslan");
 });
 
 //
-// Background #2: the admin is on the All Orders page
+// Background #2: click “Orders” in the sidebar, land on /allorders
 //
 Given("the admin navigates to the All Orders page", () => {
-  // go straight to full orders
-  cy.visit("/allorders");
-  cy.get(".nav-tabs").should("be.visible");
-});
-
-//
-// @orders-tabs
-// Scenario: Default tab is mpartialScope - Xactimate
-//
-Then('the URL should include "/allorders"', () => {
+  cy.get("aside").contains("Orders").click();
   cy.url().should("include", "/allorders");
-});
-
-Then('the "{string}" tab is active', (tabLabel: string) => {
-  cy.get(".nav-tabs")
-    .contains(tabLabel)
-    .should("have.class", "active")
-    .and("be.visible");
+  // wait for the three tabs to render
+  cy.get(".allOrderTable span button", { timeout: 10_000 })
+    .should("have.length", 3);
 });
 
 //
-// @orders-tabs
-// Scenario: Switch to mpartialScope - Symbility tab
+// URL fragment assertion (shared step)
 //
-When('the admin clicks the "{string}" tab', (tabLabel: string) => {
-  cy.get(".nav-tabs")
+Then('the URL should include {string}', (frag: string) => {
+  cy.url().should("include", frag);
+});
+
+//
+// Active-tab assertion
+//
+Then('the {string} tab is active', (tabLabel: string) => {
+  cy.get(".allOrderTable span button.active")
+    .should("contain.text", tabLabel);
+});
+
+//
+// click-by-text tab step
+//
+When('the admin clicks the {string} tab', (tabLabel: string) => {
+  cy.get(".allOrderTable span button")
     .contains(tabLabel)
-    .should("be.visible")
     .click();
 });
 
-Then('the orders table header reads "{string}"', (tabLabel: string) => {
-  // double-check the active tab’s label
-  cy.get(".nav-tabs .active").should("contain.text", tabLabel);
+//
+// header readout assertion
+//
+Then('the orders table header reads {string}', (headerText: string) => {
+  cy.get(".allOrderTable span button.active")
+    .should("contain.text", headerText);
 });
 
 //
-// @orders-tabs
-// Scenario: Table content changes between tabs
+// remember Xactimate’s first row, then compare after switching
 //
-When('the admin notes the first row under "{string}"', (tabLabel: string) => {
-  // ensure we’re on the Xactimate tab
-  cy.get(".nav-tabs")
-    .contains(tabLabel)
-    .should("have.class", "active");
-  cy.get("table tbody tr")
-    .first()
+When('the admin notes the first row under {string}', (tabLabel: string) => {
+  cy.get(".allOrderTable .tab-content table tbody tr:first-child td:first-child")
     .invoke("text")
-    .then((txt) => {
-      firstRowTextXactimate = txt.trim();
+    .then((t) => {
+      firstRowXactimate = t.trim();
     });
 });
 
-When('the admin clicks the "{string}" tab', (tabLabel: string) => {
-  // reuse the same click logic
-  cy.get(".nav-tabs").contains(tabLabel).click();
-});
-
-Then("the first row under Symbility is different from Xactimate", () => {
-  cy.get("table tbody tr")
-    .first()
+Then('the first row under {string} is different from Xactimate', (tabLabel: string) => {
+  cy.get(".allOrderTable .tab-content table tbody tr:first-child td:first-child")
     .invoke("text")
-    .then((txt) => {
-      expect(txt.trim()).not.to.equal(firstRowTextXactimate);
+    .should((t) => {
+      expect(t.trim()).not.to.equal(firstRowXactimate);
     });
 });
 
 //
-// @orders-tabs
-// Scenario: Pagination works on Xactimate tab
+// pagination click + verify
 //
-When('the admin clicks page "{string}" in the paginator', (pageNum: string) => {
-  cy.get(".pagination").contains(pageNum).click();
+When('the admin clicks page {string} in the paginator', (pageNum: string) => {
+  cy.get(".pagination-container")
+    .should("be.visible")
+    .contains(pageNum)
+    .click();
 });
 
-Then('the table shows page "{string}" rows', (pageNum: string) => {
-  cy.get(".pagination li.active").should("contain.text", pageNum);
+Then('the table shows page {string} rows', (pageNum: string) => {
+  cy.get('.pagination-container li.selected')
+    .should('contain.text', pageNum);
 });

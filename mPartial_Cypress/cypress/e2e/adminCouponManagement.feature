@@ -1,45 +1,59 @@
-Feature: Order Coupon Management
+Feature: Manage Order Coupons
+  In order to offer promotional discounts on orders
+  As an admin user
+  I want to create, view, and validate order coupons
 
-  Background: the admin user is logged in
-    Given the admin user is logged in
-
-  Background: the admin is on the Order Coupons page
-    Given the admin navigates to the Order Coupons page
-
-  @coupon
-  Scenario: Open Create New Coupon modal
-    When the admin clicks the "Create New Coupon" button
-    Then the "Create New Coupon" modal is visible
-    And the "Save" button is disabled
+  Background:
+    Given I am logged in as an admin
+    And I am on the Order Coupons page
 
   @coupon
-  Scenario: Cancel Create New Coupon modal
-    Given the modal is open
-    When the admin clicks the "X" button
-    Then the modal is closed
-    And no new coupon appears in the table
+  Scenario: Open the Create Coupon dialog
+    When I click the Create New Coupon button
+    Then the Create Coupon dialog is displayed
+    And the Save button is disabled
+
+  @coupon
+  Scenario: Cancel coupon creation
+    Given the Create Coupon dialog is open
+    When I click the Close icon
+    Then the dialog is hidden
+    And no coupon is added to the coupons list
 
   @coupon
   Scenario: Create a valid percentage coupon
-    Given the modal is open
-    When the admin fills:
-      | Coupon Code           | TESTPCT10                |
-      | Product               | mpartialScope Xactimate   |
-      | Coupon Type           | Percentage               |
-      | Coupon Percentage     | 10                       |
-      | Application Active    | today                    |
-      | Application Expiration| tomorrow                 |
-    And the admin clicks "Save"
-    Then the modal is closed
-    And the coupons table contains a row with:
-      | Code              | TESTPCT10  |
-      | Discount Amount / % | 10%        |
+    Given the Create Coupon dialog is open
+
+    When I enter the following text fields:
+      | Field               | Value      |
+      | Coupon Code         | Coupon101  |
+      | Coupon Percentage   | 10         |
+      | Application Active          |  06/24/2025     |
+      | Application Expiration     | 06/25/2025   |
+      | Number of Customers     | 15   |
+      | Application limit per user     | 3   |
+
+    And I choose from the following dropdowns:
+      | Field          | Option                    |
+      | Product        | mpartialScope Xactimate    |
+      | Coupon Type    | Percentage                |
+      | Coupon For     | Public                    |
+
+    And I click Save
+
+    Then the Create Coupon dialog is hidden
+    And the coupons table shows:
+      | Code      | Discount |
+      | Coupon101 | 10%      |
 
   @coupon
-  Scenario: Duplicate coupon code validation
-    Given the modal is open
-    And a coupon with code "EXISTING10" already exists
-    When the admin enters "EXISTING10" in "Coupon Code" and fills required fields
-    And the admin clicks "Save"
-    Then the inline error "Coupon code already in use" is shown
-    And the modal remains open
+  Scenario: Prevent duplicate coupon codes
+    Given the Create Coupon dialog is open
+    And a coupon with code "Coupon101" already exists
+
+    When I enter "Coupon101" as the Coupon Code
+    And I fill in all other required fields with valid values
+    And I click Save
+
+    Then I see the inline error "Coupon101 is already existed"
+    And the dialog remains open
