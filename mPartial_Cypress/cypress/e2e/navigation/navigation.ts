@@ -16,7 +16,7 @@ Given("the user is logged in", () => {
 //
 // — Header links
 //
-When('the user clicks the {string} header link', (linkText: string) => {
+When('the user navigate the {string} header link', (linkText: string) => {
   // if the toggler (hamburger) is visible, open the menu
   cy.get("button.navbar-toggler").then(($btn) => {
     if ($btn.is(":visible")) {
@@ -59,14 +59,14 @@ Given("the user is on the estimating software chooser", () => {
   cy.contains("Choose your estimating software").should("be.visible");
 });
 
-When('the user clicks the "Continue with Xactimate" button', () => {
+When('the user navigate the "Continue with Xactimate" button', () => {
   cy.contains("Continue with Xactimate").click();
 });
 
 //
 // — Account / Profile navigation
 //
-When('the user opens the user menu and clicks {string}', (menuItem: string) => {
+When('the user opens the user menu and navigate {string}', (menuItem: string) => {
   // 1) Expand the header navbar if it’s collapsed
   cy.get("button.navbar-toggler").then(($btn) => {
     if ($btn.is(":visible")) {
@@ -94,7 +94,7 @@ Given("the user is on the My Account page", () => {
   cy.get("h1").should("have.text", "My Account");
 });
 
-When('the user clicks the {string} tab', (tabName: string) => {
+When('the user navigate the {string} tab', (tabName: string) => {
   cy.contains(tabName).click();
 });
 
@@ -102,11 +102,11 @@ Then('the {string} section is displayed', (sectionName: string) => {
   cy.contains(sectionName).should("be.visible");
 });
 
-When('the user clicks the "Manage Users" button', () => {
+When('the user navigate the "Manage Users" button', () => {
   cy.contains("Manage Users").click();
 });
 
-When('the user clicks the "Change Password" button', () => {
+When('the user navigate the "Change Password" button', () => {
   cy.contains("Change Password").click();
 });
 
