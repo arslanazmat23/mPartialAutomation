@@ -46,14 +46,14 @@ Then('no coupon is added to the coupons list', () => {
 When('I enter the following text fields:', (table: DataTable) => {
   cy.get(DIALOG).within(() => {
     table.hashes().forEach(({ Field, Value }) => {
-      cy.contains('label', Field)      // find the right label
-        .parent()                      // jump up into the wrapper
-        .find('input')                 // grab all the inputs there…
-        //.filter(':visible')            // …only keep the visible one
-        .first()                       // just in case there are still two
-        .scrollIntoView()              // make sure Cypress can see it
-        //.clear({ force: true })        // nuke any pre-filled value
-        .type(Value, { force: true }); // type your value
+      cy.contains('label', Field)      
+        .parent()                      
+        .find('input')                 
+        //.filter(':visible')           
+        .first()                       
+        .scrollIntoView()              
+        //.clear({ force: true })      
+        .type(Value, { force: true }); 
     });
   });
 });

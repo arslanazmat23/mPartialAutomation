@@ -30,4 +30,4 @@ Feature: All Orders Tabs
   @orders-tabs
   Scenario: Pagination works on Xactimate tab
     When the admin clicks page "2" in the paginator
-    Then the table shows page "2" rows
+    Then the page '2' is selected in paginator

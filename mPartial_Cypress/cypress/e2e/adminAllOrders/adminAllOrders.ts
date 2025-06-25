@@ -87,7 +87,8 @@ When('the admin clicks page {string} in the paginator', (pageNum: string) => {
     .click();
 });
 
-Then('the table shows page {string} rows', (pageNum: string) => {
+Then('the page {string} is selected in paginator', (pageNum: string) => {
   cy.get('.pagination-container li.selected')
     .should('contain.text', pageNum);
 });
+
