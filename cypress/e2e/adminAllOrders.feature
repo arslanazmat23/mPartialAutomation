@@ -9,7 +9,7 @@ Feature: All Orders Tabs
     Given the admin is on the All Orders page
     When the admin clicks the "mpartialScope - Symbility" tab
     Then the URL should include "/allorders"
-    And the "mpartialScope - Xactimate" tab is active
+    And the "mpartialScope - Symbility" tab is active
 
   @orders-tabs
   Scenario: Switch to mpartialScope - Symbility tab
