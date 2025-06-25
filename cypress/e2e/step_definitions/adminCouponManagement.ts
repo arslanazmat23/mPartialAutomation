@@ -2,14 +2,14 @@ import { Given, When, Then, DataTable } from '@badeball/cypress-cucumber-preproc
 const DIALOG = '[Class = "support_body modal-body"]';
 
 // -- Background steps --
-Given('I am logged in as an admin', () => {
-  // navigate to login
-  cy.visit('/mpartialadmin');
-  cy.get('input[placeholder="Username"]').type('arslan');
-  cy.get('input[placeholder="Password"]').type('harslan12345');
-  cy.get('.btn').click();
-  cy.url().should("include", "/enable2FA/arslan");
-});
+// Given('I am logged in as an admin', () => {
+//   // navigate to login
+//   cy.visit('/mpartialadmin');
+//   cy.get('input[placeholder="Username"]').type('arslan');
+//   cy.get('input[placeholder="Password"]').type('harslan12345');
+//   cy.get('.btn').click();
+//   cy.url().should("include", "/enable2FA/arslan");
+// });
 
 Given('I am on the Order Coupons page', () => {
   // click sidebar link

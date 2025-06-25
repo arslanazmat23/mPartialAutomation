@@ -46,9 +46,9 @@ When('I click the close icon', () => {
   cy.get('.close > [aria-hidden="true"]').click();
 });
 
-Then('the dialog is hidden', () => {
-  cy.get(DIALOG).should('not.exist');
-});
+// Then('the dialog is hidden', () => {
+//   cy.get(DIALOG).should('not.exist');
+// });
 
 Then('no new user is added to the users table', () => {
   cy.get(TABLE_WRAPPER).should('not.contain.value', 'newuser');

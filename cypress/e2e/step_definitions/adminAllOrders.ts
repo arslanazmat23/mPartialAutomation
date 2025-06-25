@@ -29,9 +29,9 @@ Given("the admin navigates to the All Orders page", () => {
 //
 // URL fragment assertion (shared step)
 //
-Then('the URL should include {string}', (frag: string) => {
-  cy.url().should("include", frag);
-});
+// Then('the URL should include {string}', (frag: string) => {
+//   cy.url().should("include", frag);
+// });
 
 //
 // Active-tab assertion

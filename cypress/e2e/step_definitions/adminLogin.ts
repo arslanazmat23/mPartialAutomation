@@ -1,6 +1,6 @@
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
-Given("the user is on the login page", () => {
+Given("the user is on the Admin login page", () => {
   cy.visit("https://dev.mpartial.io/mpartialadmin");
 });
 
@@ -8,11 +8,11 @@ When("the user enters a valid Username", () => {
   cy.get('input[placeholder="Username"]').type("arslan");
 });
 
-When("the user enters the correct password", () => {
+When("the user enters the Admin password", () => {
   cy.get('input[type="password"]').type("harslan12345");
 });
 
-When("the user clicks the SIGN IN button", () => {
+When("the Admin user clicks the SIGN IN button", () => {
   cy.get('.btn').click();
 });
 

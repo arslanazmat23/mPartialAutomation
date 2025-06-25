@@ -7,14 +7,14 @@ Feature: Role Management
     Given I am logged in as an admin
     And I am on the Role Management page
  
-  @skip
+  
   @role
   Scenario: Open Add New User dialog
     When I click the "Add new user" button
     Then the Add New User dialog is displayed
     And the Submit button is disabled
   
-  @skip
+  
   @role
   Scenario: Cancel Add New User dialog
     Given the Add New User dialog is open
@@ -22,7 +22,7 @@ Feature: Role Management
     Then the dialog is hidden
     And no new user is added to the users table
 
-  @role
+  
   Scenario: Create a valid new user
     Given the Add New User dialog is open
     When I fill in the following fields:
@@ -37,7 +37,7 @@ Feature: Role Management
       | User Name | Email             |
       | newuser3  | new3@example.com  |
   
-  @skip
+  
   @role
   Scenario: Enable 2FA for an existing user
     Given I see user "arslan" in the users table

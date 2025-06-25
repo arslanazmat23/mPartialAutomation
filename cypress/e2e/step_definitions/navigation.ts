@@ -42,9 +42,9 @@ Then('the URL should include {string}', (partialUrl: string) => {
 Then('the landing page shows {string}', (text: string) => {
   cy.contains(text).should("be.visible");
 });
-Then('the page heading reads {string}', (heading: string) => {
-  cy.get("h1").first().should("contain.text", heading);
-});
+// Then('the page heading reads {string}', (heading: string) => {
+//   cy.get("h1").first().should("contain.text", heading);
+// });
 
 Then("the Contact form is visible", () => {
   cy.get("form").should("be.visible");
