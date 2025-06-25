@@ -1,8 +1,26 @@
 {
-  "dependencies": {
-    "prettier-plugin-gherkin": "^3.1.2"
+  "name": "mpartial_cypress",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
   "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^22.0.1",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.5",
+    "@types/node": "^22.15.29",
+    "cypress": "^14.4.1",
+    "cypress-xpath": "^2.0.1",
+    "esbuild": "^0.25.5",
+    "mailosaur": "^8.8.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3",
+    "prettier-plugin-gherkin": "^3.1.2",
     "prettier": "^3.6.1"
+
   }
 }
