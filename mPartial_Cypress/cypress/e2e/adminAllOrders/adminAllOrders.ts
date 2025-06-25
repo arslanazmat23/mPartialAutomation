@@ -74,10 +74,6 @@ When('the admin notes the first row under "{string}"', (tabLabel: string) => {
     });
 });
 
-When('the admin clicks the "{string}" tab', (tabLabel: string) => {
-  // reuse the same click logic
-  cy.get(".nav-tabs").contains(tabLabel).click();
-});
 
 Then("the first row under Symbility is different from Xactimate", () => {
   cy.get("table tbody tr")
