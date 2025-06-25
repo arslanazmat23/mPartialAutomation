@@ -25,19 +25,19 @@ Feature: Manage Order Coupons
     Given the Create Coupon dialog is open
 
     When I enter the following text fields:
-      | Field               | Value      |
-      | Coupon Code         | Coupon101  |
-      | Coupon Percentage   | 10         |
-      | Application Active          |  06/24/2025     |
-      | Application Expiration     | 06/25/2025   |
-      | Number of Customers     | 15   |
-      | Application limit per user     | 3   |
+      | Field                      | Value      |
+      | Coupon Code                | Coupon101  |
+      | Coupon Percentage          | 10         |
+      | Application Active         | 06/24/2025 |
+      | Application Expiration     | 06/25/2025 |
+      | Number of Customers        | 15         |
+      | Application limit per user | 3          |
 
     And I choose from the following dropdowns:
-      | Field          | Option                    |
-      | Product        | mpartialScope Xactimate    |
-      | Coupon Type    | Percentage                |
-      | Coupon For     | Public                    |
+      | Field       | Option                  |
+      | Product     | mpartialScope Xactimate |
+      | Coupon Type | Percentage              |
+      | Coupon For  | Public                  |
 
     And I click Save
 

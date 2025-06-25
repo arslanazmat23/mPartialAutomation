@@ -1,0 +1,21 @@
+{
+  "singleQuote": true,
+  "tabWidth": 2,
+  "useTabs": false,
+  "bracketSameLine": false,
+  "bracketSpacing": true,
+  "printWidth": 120,
+  "trailingComma": "es5",
+  "plugins": [ "prettier-plugin-gherkin"],
+  "attributeGroups": [
+    "$ANGULAR_STRUCTURAL_DIRECTIVE",
+    "$ANGULAR_OUTPUT",
+    "$ANGULAR_TWO_WAY_BINDING",
+    "$ANGULAR_INPUT",
+    "^(id|name)$",
+    "^class$",
+    "$DEFAULT",
+    "^aria-",
+    "^data-"
+  ]
+}
