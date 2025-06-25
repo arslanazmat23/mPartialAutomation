@@ -8,5 +8,11 @@
       "forceConsistentCasingInFileNames": true,
       "types": ["cypress", "@badeball/cypress-cucumber-preprocessor"]
     },
-    "include": ["cypress/**/*.ts"]
+    "include": [
+      "cypress/**/*.ts",
+      "**/*.cy.ts",
+      "**/*.d.ts"
+  
+    ]
+ 
   }

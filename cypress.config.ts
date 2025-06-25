@@ -25,6 +25,8 @@ export default defineConfig({
     },
     specPattern: "cypress/e2e/**/*.feature",
     baseUrl: "https://dev.mpartial.io", // change as needed
+    //stepDefinitions: "cypress/step_definitions/**/*.ts"
+    
   },
   env: {
       MAILOSAUR_API_KEY: "OHVTWfEwbw8Bg1exCLyUdqL8jOQOil4M",
