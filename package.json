@@ -21,9 +21,5 @@
     "typescript": "^5.8.3",
     "prettier-plugin-gherkin": "^3.1.2",
     "prettier": "^3.6.1"
-  },
-  "@badeball/cypress-cucumber-preprocessor": {
-    "nonGlobalStepDefinitions": false,
-    "stepDefinitions": "cypress/step_definitions/**/*.ts"
   }
 }
