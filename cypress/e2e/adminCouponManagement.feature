@@ -4,19 +4,19 @@ Feature: Manage Order Coupons
   I want to create, view, and validate order coupons
 
   Background:
-    Given I am logged in as an admin
-    And I am on the Order Coupons page
+    Given User is logged in as an admin
+    And User is on the Order Coupons page
 
   @coupon
   Scenario: Open the Create Coupon dialog
-    When I click the Create New Coupon button
+    When User click the Create New Coupon button
     Then the Create Coupon dialog is displayed
     And the Save button is disabled
 
   @coupon
   Scenario: Cancel coupon creation
     Given the Create Coupon dialog is open
-    When I click the Close icon
+    When User click the Close icon
     Then the dialog is hidden
     And no coupon is added to the coupons list
 
@@ -24,7 +24,7 @@ Feature: Manage Order Coupons
   Scenario: Create a valid percentage coupon
     Given the Create Coupon dialog is open
 
-    When I enter the following text fields:
+    When User enter the following text fields:
       | Field                      | Value      |
       | Coupon Code                | Coupon101  |
       | Coupon Percentage          | 10         |
@@ -33,13 +33,13 @@ Feature: Manage Order Coupons
       | Number of Customers        | 15         |
       | Application limit per user | 3          |
 
-    And I choose from the following dropdowns:
+    And User choose from the following dropdowns:
       | Field       | Option                  |
       | Product     | mpartialScope Xactimate |
       | Coupon Type | Percentage              |
       | Coupon For  | Public                  |
 
-    And I click Save
+    And User click Save
 
     Then the Create Coupon dialog is hidden
     And the coupons table shows:
@@ -51,9 +51,9 @@ Feature: Manage Order Coupons
     Given the Create Coupon dialog is open
     And a coupon with code "Coupon101" already exists
 
-    When I enter "Coupon101" as the Coupon Code
-    And I fill in all other required fields with valid values
-    And I click Save
+    When User enter "Coupon101" as the Coupon Code
+    And User fill in all other required fields with valid values
+    And User click Save
 
-    Then I see the inline error "Coupon101 is already existed"
+    Then User see the inline error "Coupon101 is already existed"
     And the dialog remains open

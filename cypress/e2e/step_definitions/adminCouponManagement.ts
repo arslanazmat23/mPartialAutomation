@@ -11,14 +11,14 @@ const DIALOG = '[Class = "support_body modal-body"]';
 //   cy.url().should("include", "/enable2FA/arslan");
 // });
 
-Given('I am on the Order Coupons page', () => {
+Given('User is on the Order Coupons page', () => {
   // click sidebar link
   cy.get('aside').contains('Order Coupons').click();
   cy.url().should('include', '/coupons');
 });
 
 // -- Create dialog open/close --
-When('I click the Create New Coupon button', () => {
+When('User click the Create New Coupon button', () => {
   cy.get('.btn').click();
 });
 Then('the Create Coupon dialog is displayed', () => {
@@ -32,7 +32,7 @@ Given('the Create Coupon dialog is open', () => {
   cy.get('.btn').click();
   cy.get('form').should('be.visible');
 });
-When('I click the Close icon', () => {
+When('User click the Close icon', () => {
   cy.get('.close > [aria-hidden="true"]').click();
 });
 Then('the dialog is hidden', () => {
@@ -43,7 +43,7 @@ Then('no coupon is added to the coupons list', () => {
 });
 
 // -- Valid percentage coupon --
-When('I enter the following text fields:', (table: DataTable) => {
+When('User enter the following text fields:', (table: DataTable) => {
   cy.get(DIALOG).within(() => {
     table.hashes().forEach(({ Field, Value }) => {
       cy.contains('label', Field)      
@@ -58,7 +58,7 @@ When('I enter the following text fields:', (table: DataTable) => {
   });
 });
 
-When('I choose from the following dropdowns:', (table: DataTable) => {
+When('User choose from the following dropdowns:', (table: DataTable) => {
   const rows = table.hashes();
   rows.forEach(({ Field, Option }) => {
     cy.get('label').contains(Field)
@@ -68,7 +68,7 @@ When('I choose from the following dropdowns:', (table: DataTable) => {
   });
 });
 
-When('I click Save', () => {
+When('User click Save', () => {
   cy.get(DIALOG)
     .find('[class="btn btn-lg"]')
     //.scrollIntoView()
@@ -96,14 +96,14 @@ Given('a coupon with code {string} already exists', (existingCode: string) => {
     body: [{ code: existingCode, discount: 5 }],
   }).as('getCoupons');
 });
-When('I enter {string} as the Coupon Code', (code: string) => {
+When('User enter {string} as the Coupon Code', (code: string) => {
   cy.get('label').contains('Coupon Code')
     .parent()
     .find('input')
     .clear()
     .type(code , { force: true }); ;
 });
-When('I fill in all other required fields with valid values', () => {
+When('User fill in all other required fields with valid values', () => {
   cy.get(DIALOG).within(() => {
     // ---- Coupon Percentage ----
     // sanity-check the label
@@ -140,7 +140,7 @@ When('I fill in all other required fields with valid values', () => {
   });
 });
 
-Then('I see the inline error {string}', (msg: string) => {
+Then('User see the inline error {string}', (msg: string) => {
   cy.get(DIALOG)
     .contains('span', msg)          // find *any* element with your text
     .scrollIntoView()       // in case it’s off-screen or clipped
