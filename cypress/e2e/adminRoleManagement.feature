@@ -6,14 +6,14 @@ Feature: Role Management
   Background:
     Given User is logged in as an admin
     And User is on the Role Management page
- 
+
   @skip
   @role
   Scenario: Open Add New User dialog
     When User click the "Add new user" button
     Then the Add New User dialog is displayed
     And the Submit button is enabled
-  
+
   @skip
   @role
   Scenario: Cancel Add New User dialog
@@ -26,18 +26,17 @@ Feature: Role Management
   Scenario: Create a valid new user
     Given the Add New User dialog is open
     When User fill in the following fields:
-      | Field        | Value             |
-      | User Name    | newuser3          |
-      | Display Name | New User One      |
-      | Email        | new3@example.com  |
-      | Password     | P@ssw0rd!         |
+      | Field        | Value            |
+      | User Name    | newuser3         |
+      | Display Name | New User One     |
+      | Email        | new3@example.com |
+      | Password     | P@ssw0rd!        |
     And User click the Submit button
     Then the dialog is hidden
     And the users table includes a row with:
-      | User Name | Email             |
-      | newuser3  | new3@example.com  |
-  
-  
+      | User Name | Email            |
+      | newuser3  | new3@example.com |
+
   @role
   Scenario: Enable 2FA for an existing user
     Given User locate "arslan" in the users table

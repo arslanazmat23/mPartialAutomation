@@ -1,4 +1,4 @@
-Feature: Impartial Signup Flow
+Feature: mpartial Signup Flow
 
   Scenario Outline: User completes signup from start to finish
     Given the user is on the signup page
@@ -35,13 +35,12 @@ Feature: Impartial Signup Flow
     # pass the actual email into the verification step
     When the user retrieves and visits their verification link for "<email>"
     Then the email verification page is displayed
-   # When the user verifies their email via Mailosaur "<email>"
-   # And the user clicks "CONTINUE"
+    # When the user verifies their email via Mailosaur "<email>"
+    # And the user clicks "CONTINUE"
     Then the login page is displayed
     When the user logs in with "<email>" and "<password>"
     Then the profile is displayed
 
-
-  Examples:
-    | email                       | firstName     | lastName | cellNumber   | role           | password         |
-    | adventure-again@wrijtpjg.mailosaur.net    | Hafiz         | Arslan   | 0123456789   | Contractor     | Your@Password123  |
+    Examples:
+      | email                           | firstName | lastName | cellNumber | role       | password         |
+      | yes-wait@wrijtpjg.mailosaur.net | Hafiz     | Arslan   | 0123456789 | Contractor | Your@Password123 |
