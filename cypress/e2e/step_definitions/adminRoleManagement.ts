@@ -2,8 +2,7 @@ import { Given, When, Then, DataTable } from '@badeball/cypress-cucumber-preproc
 
 const DIALOG = '[class="support_body modal-body"]';
 const TABLE_WRAPPER = '.admin-order-wrap';
-const USERS_GRID = '[role="table"]'
-
+const USERS_GRID = '[role="table"]';
 
 //
 // — Background: admin is logged in & on Role Management
@@ -33,8 +32,7 @@ Then('the Add New User dialog is displayed', () => {
 });
 
 Then('the Submit button is enabled', () => {
-  cy.get(DIALOG)
-    .contains('button', 'Submit').should('be.enabled').and('have.text', 'Submit');
+  cy.get(DIALOG).contains('button', 'Submit').should('be.enabled').and('have.text', 'Submit');
 });
 //
 // @role Scenario: Cancel Add New User dialog
@@ -65,15 +63,10 @@ When('User fill in the following fields:', (table: DataTable) => {
     const selector = `input[placeholder="${Field}"]`;
 
     // 1) clear it
-    cy.get(DIALOG).find(selector)
-      .scrollIntoView()
-      .should('be.visible')
-      .clear({ force: true });
+    cy.get(DIALOG).find(selector).scrollIntoView().should('be.visible').clear({ force: true });
 
     // 2) type into it
-    cy.get(DIALOG).find(selector)
-      .scrollIntoView()
-      .type(Value, { force: true });
+    cy.get(DIALOG).find(selector).scrollIntoView().type(Value, { force: true });
   });
 });
 
@@ -82,23 +75,14 @@ When('User click the Submit button', () => {
   cy.intercept('POST', '**/GIServer/AddNewAdminUser*').as('addUser');
 
   // 2) Scope your click to the modal’s own “Submit” button
-  cy.get(DIALOG)
-  .contains('button', 'Submit')
-  .click({ force: true })
-   //.then(() => {
-   // cy.log('✅ clicked submit')
-   // console.log('✅ clicked submit')
-  
+  cy.get(DIALOG).contains('button', 'Submit').click({ force: true });
+  //.then(() => {
+  // cy.log('✅ clicked submit')
+  // console.log('✅ clicked submit')
 
   // 3) Wait for that POST to finish before moving on
   cy.wait('@addUser');
 });
-
-// Then('the dialog is hidden', () => {
-//   // first ensure we've navigated/stayed on the page, then assert the modal is gone
-//   cy.url().should('include', '/role-management');
-//   cy.get(DIALOG).should('not.exist');
-// });
 
 Then('the users table includes a row with:', (table: DataTable) => {
   const [{ 'User Name': userName, Email: email }] = table.hashes();
@@ -116,16 +100,16 @@ Then('the users table includes a row with:', (table: DataTable) => {
 //
 Given('User locate {string} in the users table', (userName: string) => {
   cy.get(USERS_GRID)
-    .find('[role="row"]')        // grab all of the rows
-    .contains(userName)          // find the one that has your name
-    .should('be.visible')        // assert it’s on screen
-})
+    .find('[role="row"]') // grab all of the rows
+    .contains(userName) // find the one that has your name
+    .should('be.visible'); // assert it’s on screen
+});
 
 When('User click the view icon next to {string}', (userName: string) => {
   cy.contains('[role="row"]', userName)
-    .find('#cell-3-0 > div > a > img')  // your actual selector here
-    .click({ force: true })
-})
+    .find('#cell-3-0 > div > a > img') // your actual selector here
+    .click({ force: true });
+});
 
 Then('User navigate to {string}', (path: string) => {
   cy.url().should('include', path);

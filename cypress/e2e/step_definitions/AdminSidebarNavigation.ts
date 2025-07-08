@@ -1,9 +1,9 @@
 // cypress/e2e/AdminSidebarNavigation.ts
-import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
+import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 
 // pull creds from your cypress.config.ts
-const ADMIN_USERNAME = Cypress.env("ADMIN_USERNAME") as string;
-const ADMIN_PASSWORD = Cypress.env("ADMIN_PASSWORD") as string;
+const ADMIN_USERNAME = Cypress.env('ADMIN_USERNAME') as string;
+const ADMIN_PASSWORD = Cypress.env('ADMIN_PASSWORD') as string;
 
 // Given("the admin user is logged in", () => {
 
@@ -25,9 +25,9 @@ const ADMIN_PASSWORD = Cypress.env("ADMIN_PASSWORD") as string;
 // });
 
 When('the admin clicks the {string} sidebar link', (linkText: string) => {
-  cy.get("aside")             // scope into the sidebar
-    .contains("a", linkText)  // find the link by its exact text
-    .should("be.visible")
+  cy.get('aside') // scope into the sidebar
+    .contains('a', linkText) // find the link by its exact text
+    .should('be.visible')
     .click();
 });
 
@@ -35,6 +35,6 @@ When('the admin clicks the {string} sidebar link', (linkText: string) => {
 //   cy.url().should("include", fragment);
 // });
 
-Then("the page heading reads {string}", (heading: string) => {
-  cy.get('h2').first().should("contain.text", heading);
+Then('the page heading reads {string}', (heading: string) => {
+  cy.get('h2').first().should('contain.text', heading);
 });

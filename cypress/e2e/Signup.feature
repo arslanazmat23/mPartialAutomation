@@ -42,5 +42,5 @@ Feature: mpartial Signup Flow
     Then the profile is displayed
 
     Examples:
-      | email                           | firstName | lastName | cellNumber | role       | password         |
-      | yes-wait@wrijtpjg.mailosaur.net | Hafiz     | Arslan   | 0123456789 | Contractor | Your@Password123 |
+      | email                               | firstName | lastName | cellNumber | role       | password         |
+      | model-leader@wrijtpjg.mailosaur.net | Hafiz     | Arslan   | 0123456789 | Contractor | Your@Password123 |

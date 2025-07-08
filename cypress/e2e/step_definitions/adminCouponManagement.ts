@@ -1,16 +1,6 @@
 import { Given, When, Then, DataTable } from '@badeball/cypress-cucumber-preprocessor';
 const DIALOG = '[Class = "support_body modal-body"]';
 
-// -- Background steps --
-// Given('I am logged in as an admin', () => {
-//   // navigate to login
-//   cy.visit('/mpartialadmin');
-//   cy.get('input[placeholder="Username"]').type('arslan');
-//   cy.get('input[placeholder="Password"]').type('harslan12345');
-//   cy.get('.btn').click();
-//   cy.url().should("include", "/enable2FA/arslan");
-// });
-
 Given('User is on the Order Coupons page', () => {
   // click sidebar link
   cy.get('aside').contains('Order Coupons').click();
@@ -46,14 +36,14 @@ Then('no coupon is added to the coupons list', () => {
 When('User enter the following text fields:', (table: DataTable) => {
   cy.get(DIALOG).within(() => {
     table.hashes().forEach(({ Field, Value }) => {
-      cy.contains('label', Field)      
-        .parent()                      
-        .find('input')                 
-        //.filter(':visible')           
-        .first()                       
-        .scrollIntoView()              
-        //.clear({ force: true })      
-        .type(Value, { force: true }); 
+      cy.contains('label', Field)
+        .parent()
+        .find('input')
+        //.filter(':visible')
+        .first()
+        .scrollIntoView()
+        //.clear({ force: true })
+        .type(Value, { force: true });
     });
   });
 });
@@ -61,10 +51,7 @@ When('User enter the following text fields:', (table: DataTable) => {
 When('User choose from the following dropdowns:', (table: DataTable) => {
   const rows = table.hashes();
   rows.forEach(({ Field, Option }) => {
-    cy.get('label').contains(Field)
-      .parent()
-      .find('select')
-      .select(Option);
+    cy.get('label').contains(Field).parent().find('select').select(Option);
   });
 });
 
@@ -97,11 +84,7 @@ Given('a coupon with code {string} already exists', (existingCode: string) => {
   }).as('getCoupons');
 });
 When('User enter {string} as the Coupon Code', (code: string) => {
-  cy.get('label').contains('Coupon Code')
-    .parent()
-    .find('input')
-    .clear()
-    .type(code , { force: true }); ;
+  cy.get('label').contains('Coupon Code').parent().find('input').clear().type(code, { force: true });
 });
 When('User fill in all other required fields with valid values', () => {
   cy.get(DIALOG).within(() => {
@@ -126,25 +109,19 @@ When('User fill in all other required fields with valid values', () => {
       .type('2025-01-02', { force: true });
 
     // ---- Product / Coupon Type / Coupon For ----
-    cy.get('form > :nth-child(2) > .form-control')
-      .scrollIntoView()
-      .select('mpartialScope Xactimate', { force: true });
+    cy.get('form > :nth-child(2) > .form-control').scrollIntoView().select('mpartialScope Xactimate', { force: true });
 
-    cy.get(':nth-child(3) > .form-control')
-      .scrollIntoView()
-      .select('Percentage', { force: true });
+    cy.get(':nth-child(3) > .form-control').scrollIntoView().select('Percentage', { force: true });
 
-    cy.get(':nth-child(5) > .form-control')
-      .scrollIntoView()
-      .select('Public', { force: true });
+    cy.get(':nth-child(5) > .form-control').scrollIntoView().select('Public', { force: true });
   });
 });
 
 Then('User see the inline error {string}', (msg: string) => {
   cy.get(DIALOG)
-    .contains('span', msg)          // find *any* element with your text
-    .scrollIntoView()       // in case it’s off-screen or clipped
-    //.should('be.visible');
+    .contains('span', msg) // find *any* element with your text
+    .scrollIntoView(); // in case it’s off-screen or clipped
+  //.should('be.visible');
 });
 Then('the dialog remains open', () => {
   cy.get(DIALOG).should('be.visible');

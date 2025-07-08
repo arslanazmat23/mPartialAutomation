@@ -6,6 +6,7 @@ import MailosaurClient from "mailosaur";
 
 export default defineConfig({
   e2e: {
+    chromeWebSecurity: false,
     setupNodeEvents(on, config) {
       addCucumberPreprocessorPlugin(on, config);
       on("file:preprocessor", createBundler({ plugins: [esbuildPlugin(config)] }));
